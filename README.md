@@ -20,11 +20,12 @@ This repo is a public log of my progress: every component library, footprint, an
 ```
 kicad-learning/
 ├── libraries/
-│   ├── symbols/           # Custom .kicad_sym files
-│   └── footprints/        # Custom .pretty footprint libraries
-├── projects/              # Full KiCad projects (schematic + PCB) Not completed
-├── datasheets/            # Reference datasheets for parts used
-└── images/                # Screenshots used in this README
+│   ├── symbols/       # Custom .kicad_sym files
+│   ├── footprints/    # Custom .pretty footprint libraries
+│   └── Schematics/    # Exported netlists from KiCad projects
+├── projects/          # Full KiCad projects (schematic + PCB) — planned
+├── datasheets/        # Reference datasheets for parts used
+└── images/            # Screenshots used in this README
 ```
 
 ---
@@ -36,7 +37,7 @@ kicad-learning/
 | 1 | Reading a datasheet | ✅ Done |
 | 2 | Creating a schematic symbol | ✅ Done |
 | 3 | Creating a footprint | ✅ Done |
-| 4 | Schematic capture | ⬜ Not started |
+| 4 | Schematic capture & ERC | ✅ Done |
 | 5 | PCB layout & routing | ⬜ Not started |
 
 ---
@@ -45,10 +46,9 @@ kicad-learning/
 
 ### Videos 1–4 — Datasheet, Symbol, Footprint, LED Driver
 
-**Part:** `CAT4104VP2` — `GT3`
+**Part:** `CAT4104VP2` — `GT3` (LED driver)
 
-**Datasheet review.** Pulled the pin assignments, absolute maximum ratings,
-and the recommended land pattern out of the datasheet.
+**Datasheet review.** Pulled the pin assignments, absolute maximum ratings, and the recommended land pattern out of the datasheet.
 
 ![Datasheet package dimensions](images/CAT4104_datasheetDimensions_ss.png)
 
@@ -61,15 +61,13 @@ and the recommended land pattern out of the datasheet.
 - Pad length:  `0.68 mm`
 - Row spacing: `2.72 mm`
 
-Row spacing isn't given directly — it's the center-to-center distance between
-opposite pads, so I derived it from the overall land pattern width minus one
-pad length.
+Row spacing isn't given directly — it's the center-to-center distance between opposite pads, so I derived it from the overall land pattern width minus one pad length.
 
 **Symbol.** Built the schematic symbol in the Symbol Editor with pin numbers, pin names, and electrical types set to match the datasheet.
 
 ![Custom schematic symbol](images/CAT4104_symbol_ss_1.png)
 
-*Schematic symbol for `[CAT4104VP2]`.*
+*Schematic symbol for `CAT4104VP2`.*
 
 **Footprint.** Built the matching footprint in the Footprint Editor using the recommended land pattern — pads, silkscreen outline, courtyard, and pin 1 marker.
 
@@ -83,17 +81,19 @@ pad length.
 
 ---
 
-### Videos 5-7 — LEDs, USB connector, Schematic
+### Videos 5–6 — LEDs & USB Connector
 
-### USB
+**Part:** `10164359-00011LF` (USB connector)
+
+This component acts as the board's power source.
 
 **Datasheet review.**
 
-![Custom schematic symbol](images/USB_DatasheetDimentions_ss.png)
+![USB connector datasheet dimensions](images/USB_DatasheetDimentions_ss.png)
 
-Simmilar method for the square pads but the oval components pads are special. They are through out holes, used for things that would go through the whole PCB board. In this case, the USB plug is attaged to the board at those 4 holes  
+Similar approach to the LED driver for the square pads, but the oval pads are different — they're plated through-holes, used for parts that need a mechanical anchor through the board. In this case, the USB plug is secured to the board through those four holes.
 
-**Symbol for USB connector `[10164359-00011LF]`**
+**Symbol for USB connector `10164359-00011LF`**
 
 ![Custom schematic symbol](images/USB_symbol_ss.png)
 
@@ -105,24 +105,40 @@ Simmilar method for the square pads but the oval components pads are special. Th
 
 ![3D view](images/USB_3Dpreview_ss.png)
 
+**Part:** `158301265A` (LED)
+
+**Datasheet review.**
+
+![LED datasheet dimensions](images/LED_datasheetDimensions_ss.png)
+
+Same approach as before for the square pads.
+
+**Symbol for LED `158301265A`**
+
+![Custom schematic symbol](images/LED_symbol_ss.png)
+
+**Footprint.**
+
+![Custom footprint](images/LED_footprint_ss.png)
+
+**3D preview**
+
+![3D view](images/LED_3Dpreview_ss.png)
 
 ---
 
-### LEDs
+### Video 7 — Schematic Capture & ERC
 
+![Main Schematic](images/TopSchematic.png)
 
+This schematic connects all the components to achieve a single goal: the LED driver keeps the LEDs lit, and both the driver and the LEDs are powered by the USB connector section. The `+5V_USB` tags are net labels — any tags sharing the same name are treated as electrically connected, removing the need for wires spanning across the schematic or between sections.
 
----
-
-
+After finishing the design, the Electrical Rules Checker (ERC) was used to validate the schematic. Most issues found in this simple project were solved with minor adjustments in the Symbol Editor.
 
 **What I learned:**
 
-- Datasheets give you much more than pins: absolute maximum ratings,
-  operating conditions, mechanical drawings, recommended land patterns, and
-  thermal data all shape the design.
-- Rolling your own symbols beats downloading them. Online libraries often
-  break convention or contain errors you won't catch until fab.
+- Datasheets give you much more than pins: absolute maximum ratings, operating conditions, mechanical drawings, recommended land patterns, and thermal data all shape the design.
+- Rolling your own symbols beats downloading them. Online libraries often break convention or contain errors you won't catch until fab.
 
 ---
 
