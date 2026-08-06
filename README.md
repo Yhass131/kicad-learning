@@ -43,7 +43,7 @@ kicad-learning/
 
 ## Work Log
 
-### Videos 1–3 — Datasheet, Symbol, Footprint
+### Videos 1–4 — Datasheet, Symbol, Footprint, LED Driver
 
 **Part:** `CAT4104VP2` — `GT3`
 
@@ -67,7 +67,7 @@ pad length.
 
 **Symbol.** Built the schematic symbol in the Symbol Editor with pin numbers, pin names, and electrical types set to match the datasheet.
 
-![Custom schematic symbol](images/CAT4104_symbol_ss.png)
+![Custom schematic symbol](images/CAT4104_symbol_ss_1.png)
 
 *Schematic symbol for `[CAT4104VP2]`.*
 
@@ -81,7 +81,40 @@ pad length.
 
 *3D preview with the model assigned.*
 
-**What I learned:**
+---
+
+### Videos 5-7 — LEDs, USB connector, Schematic
+
+### USB
+
+**Datasheet review.**
+
+![Custom schematic symbol](images/USB_DatasheetDimentions_ss.png)
+
+Simmilar method for the square pads but the oval components pads are special. They are through out holes, used for things that would go through the whole PCB board. In this case, the USB plug is attaged to the board at those 4 holes  
+
+**Symbol for USB connector `[10164359-00011LF]`**
+
+![Custom schematic symbol](images/USB_symbol_ss.png)
+
+**Footprint.**
+
+![Custom footprint](images/USB_footprint_ss.png)
+
+**3D preview**
+
+![3D view](images/USB_3Dpreview_ss.png)
+
+
+---
+
+### LEDs
+
+
+
+---
+
+
 
 **What I learned:**
 
