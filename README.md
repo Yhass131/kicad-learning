@@ -1,6 +1,6 @@
-# kicad-learning
+# KiCad-learning
 
-Working through KiCad from scratch — datasheet reading, custom symbols, custom footprints, and eventually full board layouts. Following [Steppe School's KiCad tutorial playlist](https://www.youtube.com/@SteppeSchool).
+Working through KiCad from scratch — datasheet reading, custom symbols, custom footprints, and full board layouts, from schematic capture through fabrication files. Following [Steppe School's KiCad tutorial playlist](https://www.youtube.com/playlist?list=PLmXXQ1iFwiyK4I1KeTiDFBSFvOB2ja55Y).
 
 This repo is a public log of my progress: every component library, footprint, and board I build while learning, along with notes on what each step actually taught me.
 
@@ -20,25 +20,14 @@ This repo is a public log of my progress: every component library, footprint, an
 ```
 kicad-learning/
 ├── libraries/
-│   ├── symbols/       # Custom .kicad_sym files
-│   ├── footprints/    # Custom .pretty footprint libraries
-│   └── Schematics/    # Exported netlists from KiCad projects
-├── projects/          # Full KiCad projects (schematic + PCB) — planned
-├── datasheets/        # Reference datasheets for parts used
-└── images/            # Screenshots used in this README
+│   ├── symbols/           # Custom .kicad_sym files
+│   └── footprints/        # Custom .pretty footprint libraries
+├── projects/
+│   └── led-driver/        # Full board: schematic, PCB, fabrication files
+│       └── fabrication/   # Gerbers + BOM submitted to PCBWay
+├── datasheets/            # Reference datasheets for parts used
+└── images/                # Screenshots used in this README
 ```
-
----
-
-## Progress
-
-| # | Topic | Status |
-|---|-------|--------|
-| 1 | Reading a datasheet | ✅ Done |
-| 2 | Creating a schematic symbol | ✅ Done |
-| 3 | Creating a footprint | ✅ Done |
-| 4 | Schematic capture & ERC | ✅ Done |
-| 5 | PCB layout & routing | ⬜ Not started |
 
 ---
 
@@ -89,7 +78,7 @@ This component acts as the board's power source.
 
 **Datasheet review.**
 
-![USB connector datasheet dimensions](images/USB_DatasheetDimentions_ss.png)
+![USB connector datasheet dimensions](images/USB_DatasheetDimensions_ss.png)
 
 Similar approach to the LED driver for the square pads, but the oval pads are different — they're plated through-holes, used for parts that need a mechanical anchor through the board. In this case, the USB plug is secured to the board through those four holes.
 
@@ -139,6 +128,28 @@ After finishing the design, the Electrical Rules Checker (ERC) was used to valid
 
 - Datasheets give you much more than pins: absolute maximum ratings, operating conditions, mechanical drawings, recommended land patterns, and thermal data all shape the design.
 - Rolling your own symbols beats downloading them. Online libraries often break convention or contain errors you won't catch until fab.
+
+---
+
+### Video 8 and 9 — PCB Stackup, Routing & Filled Zones
+
+![Top-level board footprint](images/TopFootprint.png)
+
+*Top-level board footprint.*
+
+Before routing, set up the board's physical stackup in Board Setup — layer count, dielectric and copper layer thicknesses, and copper weight — so trace-width/impedance calculations and DRC behave correctly downstream. With the stackup defined, routed the traces, set trace widths, and added filled copper zones (ground/power pours) with proper net assignment, following best-practice pour clearance and stitching.
+
+---
+
+### Video 10 — ERC Cleanup
+
+Ran the ERC again and traced each error and warning back to its source — sometimes in the top-level schematic, sometimes in an individual component's schematic symbol or footprint. Kept checking and fixing until everything cleared, then cleaned up the silkscreen.
+
+---
+
+### Video 11 and 12 — Gerbers, BOM & PCBWay Submission
+
+To send the design out for fabrication with PCBWay, I needed the Gerber files and a bill of materials (BOM). Gerbers were straightforward to export from the PCB editor. The BOM took more work — I had to reformat it in the Schematic Editor to match [PCBWay's expected format](https://www.pcbway.com/blog/PCB_Assembly/How_to_Build_a_BOM__Bill_Of_Materials_.html). Downloaded both into a manufacturing folder and uploaded them to PCBWay for review.
 
 ---
 

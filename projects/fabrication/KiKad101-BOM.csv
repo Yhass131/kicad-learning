@@ -1,0 +1,7 @@
+"#","Reference","Qty","Manufacturer","Value","Part Number","Description"
+"1","LED1,LED2,LED3,LED4","4","Würth Elektronik","~","158301265A","WL-SWTP SMT WHITE LED TOP VIEW P"
+"2","USB1","1","Amphenol ICC (FCI)","~","10164359-00011LF","USB TYPE C RECEPTACLE RIGHT ANGL"
+"3","U1","1","onsemi","~","CAT4104VP2-GT3","Constant Current LED Driver"
+"4","R2,R3","2","Panasonic Industry","5k1","ERJ-3EKF5101V","RES SMD 5.1K OHM 1% 1/10W 0603"
+"5","C1,C2,C3","3","Cal-Chip Electronics, Inc.","1u","GMC04X7R105K10NT","CAP0402 X7R 1UF 10% 10V"
+"6","R1","1","Stackpole Electronics Inc","2k1","RMCF0603FT2K10","RES 2.1K OHM 1% 1/10W 0603"
